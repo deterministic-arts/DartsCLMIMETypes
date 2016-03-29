@@ -244,19 +244,34 @@
 (defgeneric mime-type-format (object)
   (:documentation "Answers the general format name of the media type
     being represented by the given MIME type designator `object'. The result
-    is a string, such as `application', `image', `multipart', etc."))
+    is a string, such as `application', `image', `multipart', etc.
+    Conventionally, the string returned by this function contains only
+    lower-case characters. Applications, which define methods on this 
+    function for their own specific representations should follow this 
+    convention in order to maximize interoperability."))
 
 (defgeneric mime-type-variant (object)
   (:documentation "Answers the format variant name of the media type
     being represented by the given MIME type designator `object'. The result
-    is a string, such as `octet-stream', `png', `vnd.ms-excel', etc."))
+    is a string, such as `octet-stream', `png', `vnd.ms-excel', etc.
+    Conventionally, the string returned by this function contains only
+    lower-case characters. Applications, which define methods on this 
+    function for their own specific representations should follow this 
+    convention in order to maximize interoperability."))
 
 (defgeneric mime-type-parameters (object)
   (:documentation "Answers the list of parameters associated with the
     MIME type designator `object'. The list is an alist, whose keys and
     values are strings. The keys are usually compared case-insensitively.
     Note, that this library requires, that the parameters are sorted
-    in lexicographic order of their keys."))
+    in lexicographic order of their keys.
+
+    Note: the parser provided by this library normalizes the case of
+    parameter names to lower-case during parsing, and most code in 
+    this library assumes, that parameter names have been canonicalized
+    this way. Applications, which define methods on this function for
+    their own specific representations should follow this convention in
+    order to maximize interoperability."))
 
 (defgeneric mime-type-string (object)
   (:documentation "Answers a string representation of the MIME type
