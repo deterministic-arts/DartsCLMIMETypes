@@ -30,7 +30,8 @@
            "MIME-TYPE" "MIME-TYPE-FORMAT" "MIME-TYPE-VARIANT" "MIME-TYPE-PARAMETERS"
            "MIME-TYPE-STRING" "MIME-TYPE-MEDIA-TYPE" "FORMAT-MIME-TYPE" "PARSE-MIME-TYPE"
            "MIME-TYPE-PARAMETER" "MIME-TYPE-DESIGNATOR" "MIME-TYPE-EQUAL" "MIME-TYPE-HASH"
-           "MIME-TYPE-BASE-TYPE")
+           "MIME-TYPE-FILE-EXTENSIONS" "MAP-OVER-MIME-FILE-ASSOCIATIONS-1" 
+           "LOAD-MIME-FILE-ASSOCIATIONS" "MAP-OVER-MIME-FILE-ASSOCIATIONS")
   (:documentation "A small library, which parses MIME type specifications
     according to the rules of RFC 2616. Full support for MIME type parameters
     is provided."))
