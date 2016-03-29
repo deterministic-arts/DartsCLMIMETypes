@@ -41,5 +41,6 @@
   ((:module :src
     :components
     ((:file "package") 
-     (:file "mimetypes")))))
+     (:file "parser")
+     (:file "objects")))))
 
