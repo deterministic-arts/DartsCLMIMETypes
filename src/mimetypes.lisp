@@ -241,11 +241,36 @@
 
 
 
-(defgeneric mime-type-format (object))
-(defgeneric mime-type-variant (object))
-(defgeneric mime-type-parameters (object))
-(defgeneric mime-type-string (object))
-(defgeneric mime-type-media-type (object))
+(defgeneric mime-type-format (object)
+  (:documentation "Answers the general format name of the media type
+    being represented by the given MIME type designator `object'. The result
+    is a string, such as `application', `image', `multipart', etc."))
+
+(defgeneric mime-type-variant (object)
+  (:documentation "Answers the format variant name of the media type
+    being represented by the given MIME type designator `object'. The result
+    is a string, such as `octet-stream', `png', `vnd.ms-excel', etc."))
+
+(defgeneric mime-type-parameters (object)
+  (:documentation "Answers the list of parameters associated with the
+    MIME type designator `object'. The list is an alist, whose keys and
+    values are strings. The keys are usually compared case-insensitively.
+    Note, that this library requires, that the parameters are sorted
+    in lexicographic order of their keys."))
+
+(defgeneric mime-type-string (object)
+  (:documentation "Answers a string representation of the MIME type
+    designator `object'. The resulting string is syntactically well-formed
+    and can be parsed back via `parse-mime-type'. In particular, all 
+    parameter keys and/or values are properly quoted (if they need to
+    be)."))
+
+(defgeneric mime-type-media-type (object)
+  (:documentation "Answers a string, which represents the media type
+    of the given MIME type designator `object'. The result is generally
+    a string of the form `format/variant', e.g., `text/plain', `image/png',
+    `application/octet-stream', etc."))
+
 (defgeneric mime-type-base-type (object))
 
 (defclass mime-type ()
@@ -279,7 +304,13 @@
 (defmethod slot-unbound (class (object mime-type) (slot (eql 'media-type)))
   (declare (ignore class slot))
   (setf (slot-value object 'media-type)
-        (concatenate 'string (mime-type-format object) "/" (mime-type-variant object))))
+        (let* ((full-type (mime-type-string object))
+               (semicolon (position #\; full-type)))
+          (if (not semicolon) full-type
+              (make-array semicolon 
+                          :element-type (array-element-type full-type)
+                          :displaced-index-offset 0
+                          :displaced-to full-type)))))
 
 
 (defmethod shared-initialize :after ((object mime-type) slots 
