@@ -84,6 +84,13 @@
                                       start))))
             :finally (return (values :atom (coerce (subseq string first) 'simple-string)
                                      start))))
+       (skip-comment (position depth)
+         (cond
+           ((>= position end) end)
+           ((eql (char string position) #\() (skip-comment (1+ position) (1+ depth)))
+           ((eql (char string position) #\)) (if (eql depth 1) (1+ position) (skip-comment (1+ position) (1- depth))))
+           ((eql (char string position) #\\) (skip-comment (+ position 2) depth))
+           (t (skip-comment (1+ position) depth))))
        (read-quoted ()
          (loop
             :with buffer := (make-array (- end start) :element-type 'character :fill-pointer 0)
@@ -110,6 +117,7 @@
                 (cond
                   ((whitep char) (incf start))
                   ((atom-char-p char) (return-from scan (read-atom)))
+                  ((eql char #\() (setf start (skip-comment (1+ start) 1)))
                   ((eql char #\") (incf start) (return-from scan (read-quoted)))
                   ((eql char #\=) (incf start) (return-from scan (values :equal nil start)))
                   ((eql char #\;) (incf start) (return-from scan (values :semicolon nil start)))
