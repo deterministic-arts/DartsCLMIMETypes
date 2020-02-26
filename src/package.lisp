@@ -1,6 +1,6 @@
 #|                                           -*- mode: lisp; coding: utf-8 -*-
   Deterministic Arts -- MIME Types
-  Copyright (c) 2016 Dirk Esser
+  Copyright (c) 2016, 2020 Dirk Esser
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
@@ -21,18 +21,18 @@
   THE SOFTWARE.
 |#
 
-(defpackage "DARTS.LIB.MIME-TYPE"
-  (:use "COMMON-LISP" "CL-PPCRE")
-  (:export "MIME-PARSE-ERROR" "MIME-PARSE-ERROR-STRING" "MIME-PARSE-ERROR-START"
-           "MIME-PARSE-ERROR-END" "MIME-PARSE-ERROR-POSITION" "MIME-PARSE-ERROR-DECODED-FORMAT"
-           "MIME-PARSE-ERROR-DECODED-VARIANT" "MIME-PARSE-ERROR-DECODED-PARAMETERS"
-           "SIMPLE-MIME-PARSE-ERROR" "PARSE-MIME-TYPE-1" "FORMAT-MIME-TYPE-1"
-           "MIME-TYPE" "MIME-TYPE-FORMAT" "MIME-TYPE-VARIANT" "MIME-TYPE-PARAMETERS"
-           "MIME-TYPE-STRING" "MIME-TYPE-MEDIA-TYPE" "FORMAT-MIME-TYPE" "PARSE-MIME-TYPE"
-           "MIME-TYPE-PARAMETER" "MIME-TYPE-DESIGNATOR" "MIME-TYPE-EQUAL" "MIME-TYPE-HASH"
-           "MIME-TYPE-FILE-EXTENSIONS" "MAP-OVER-MIME-FILE-ASSOCIATIONS-1" 
-           "LOAD-MIME-FILE-ASSOCIATIONS" "MAP-OVER-MIME-FILE-ASSOCIATIONS" "BASIC-MIME-TYPE"
-           "STANDARD-MIME-TYPE")
+(defpackage #:darts.lib.mime-type
+  (:use #:common-lisp #:cl-ppcre)
+  (:export #:mime-parse-error #:mime-parse-error-string #:mime-parse-error-start
+           #:mime-parse-error-end #:mime-parse-error-position #:mime-parse-error-decoded-format
+           #:mime-parse-error-decoded-variant #:mime-parse-error-decoded-parameters
+           #:simple-mime-parse-error #:parse-mime-type-1 #:format-mime-type-1
+           #:mime-type #:mime-type-format #:mime-type-variant #:mime-type-parameters
+           #:mime-type-string #:mime-type-media-type #:format-mime-type #:parse-mime-type
+           #:mime-type-parameter #:mime-type-designator #:mime-type-equal #:mime-type-hash
+           #:mime-type-file-extensions #:map-over-mime-file-associations-1 
+           #:load-mime-file-associations #:map-over-mime-file-associations #:basic-mime-type
+           #:standard-mime-type)
   (:documentation "A small library, which parses MIME type specifications
     according to the rules of RFC 2616. Full support for MIME type parameters
     is provided."))

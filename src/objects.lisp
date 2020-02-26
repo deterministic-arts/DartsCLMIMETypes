@@ -1,6 +1,6 @@
 #|                                           -*- mode: lisp; coding: utf-8 -*-
   Deterministic Arts -- MIME Types
-  Copyright (c) 2016 Dirk Esser
+  Copyright (c) 2016, 2020 Dirk Esser
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
   THE SOFTWARE.
 |#
 
-(in-package "DARTS.LIB.MIME-TYPE")
+(in-package #:darts.lib.mime-type)
 
 (defgeneric mime-type-format (object)
   (:documentation "Answers the general format name of the media type

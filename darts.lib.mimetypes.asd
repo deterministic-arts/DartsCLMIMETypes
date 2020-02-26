@@ -1,6 +1,6 @@
 #|                                           -*- mode: lisp; coding: utf-8 -*-
   Deterministic Arts -- MIME Types
-  Copyright (c) 2016 Dirk Esser
+  Copyright (c) 2016, 2020 Dirk Esser
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
@@ -21,11 +21,11 @@
   THE SOFTWARE.
 |#
 
-(in-package "COMMON-LISP-USER")
+(in-package #:common-lisp-user)
 
-(defpackage "DARTS.ASDF" (:use "COMMON-LISP" "ASDF"))
+(defpackage #:darts.asdf (:use #:common-lisp #:asdf))
 
-(in-package "DARTS.ASDF")
+(in-package #:darts.asdf)
 
 (defsystem :darts.lib.mimetypes
   :name "darts.lib.mimetypes"
@@ -35,7 +35,7 @@
   :licence "MIT"
   :description "MIME type parsing"
   :long-description ""
-  :depends-on (cl-ppcre)
+  :depends-on (#:cl-ppcre)
   :serial t 
   :components
   ((:module :src
